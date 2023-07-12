@@ -8,6 +8,7 @@ import { JwtStrategy } from './modules/auth/jwt.strategy';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
+import { ContactsModule } from './modules/contacts/contacts.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import configuration from './config/configuration';
     }),
     UsersModule,
     AuthModule,
+    ContactsModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { User } from 'src/modules/users/entities/user.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity({ name: 'contact' })
 export class Contact {
@@ -25,4 +32,12 @@ export class Contact {
   @ApiProperty({ default: '05669949302' })
   @Column({ name: 'phoneNumber', nullable: true })
   public phoneNumber: number;
+
+  @ApiProperty({ default: 1, nullable: true })
+  @Column({ name: 'userId', nullable: true })
+  public userId: number;
+
+  @ManyToOne(() => User, (user) => user.contacts)
+  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
+  user?: User;
 }

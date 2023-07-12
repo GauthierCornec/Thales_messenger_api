@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Contact } from 'src/modules/contacts/entities/contact.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -47,4 +49,7 @@ export class User {
   @ApiProperty({ default: 'jean' })
   @CreateDateColumn({ name: 'createdAt', nullable: true })
   public createdAt: Date;
+
+  @OneToMany(() => Contact, (contacts) => contacts.user)
+  contacts?: Contact[];
 }

@@ -51,6 +51,7 @@ export class UsersService {
 
     return await this.userRepository.findOne({
       where: { uuid },
+      relations: ['contacts'],
     });
   }
 }
