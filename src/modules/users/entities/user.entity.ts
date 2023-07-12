@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Contact } from 'src/modules/contacts/entities/contact.entity';
+import { Message } from 'src/modules/messages/entities/message.entity';
 import {
   Column,
   CreateDateColumn,
@@ -52,4 +53,7 @@ export class User {
 
   @OneToMany(() => Contact, (contacts) => contacts.user)
   contacts?: Contact[];
+
+  @OneToMany(() => Message, (messages) => messages.user)
+  messages?: Message[];
 }

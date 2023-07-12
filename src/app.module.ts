@@ -9,6 +9,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { ContactsModule } from './modules/contacts/contacts.module';
+import { MessagesModule } from './modules/messages/messages.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ContactsModule } from './modules/contacts/contacts.module';
     UsersModule,
     AuthModule,
     ContactsModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

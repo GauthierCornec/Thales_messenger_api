@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Message } from 'src/modules/messages/entities/message.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import {
   Entity,
@@ -6,6 +7,7 @@ import {
   Column,
   JoinColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'contact' })
@@ -40,4 +42,7 @@ export class Contact {
   @ManyToOne(() => User, (user) => user.contacts)
   @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
   user?: User;
+
+  @OneToMany(() => Message, (messages) => messages.contact)
+  messages?: Message[];
 }
