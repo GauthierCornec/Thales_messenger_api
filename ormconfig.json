@@ -1,0 +1,10 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 1915,
+    "username": "test_user_thales",
+    "password": "thales",
+    "database": "local_thales_db",
+    "entities": [],
+    "synchronize": true
+  }
