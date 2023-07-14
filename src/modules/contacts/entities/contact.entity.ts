@@ -1,48 +1,43 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Conversation } from 'src/modules/conversations/entities/conversation.entity';
 import { Message } from 'src/modules/messages/entities/message.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
+  Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity({ name: 'contact' })
 export class Contact {
   @PrimaryGeneratedColumn({ name: 'id' })
-  public id: number;
+  id: number;
 
-  @ApiProperty({ default: '8765432' })
-  @Column({ name: 'uuid', nullable: true })
-  public uuid: string;
+  @Column({ name: 'uuid', nullable: true, default: '8765432' })
+  uuid: string;
 
-  @ApiProperty({ default: 'email@email.fr' })
-  @Column({ name: 'email', nullable: true })
-  public email: string;
+  @Column({ name: 'email', nullable: true, default: 'email@example.com' })
+  email: string;
 
-  @ApiProperty({ default: 'jean' })
-  @Column({ name: 'firstName', nullable: true })
-  public firstName: string;
+  @Column({ name: 'firstName', nullable: true, default: 'Jean' })
+  firstName: string;
 
-  @ApiProperty({ default: 'jean' })
-  @Column({ name: 'lastName', nullable: true })
-  public lastName: string;
+  @Column({ name: 'lastName', nullable: true, default: 'Doe' })
+  lastName: string;
 
-  @ApiProperty({ default: '05669949302' })
-  @Column({ name: 'phoneNumber', nullable: true })
-  public phoneNumber: number;
+  @Column({ name: 'phoneNumber', nullable: true, default: '05669949302' })
+  phoneNumber: string;
 
-  @ApiProperty({ default: 1, nullable: true })
   @Column({ name: 'userId', nullable: true })
-  public userId: number;
+  userId: number;
 
   @ManyToOne(() => User, (user) => user.contacts)
-  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
-  user?: User;
+  @JoinColumn({ name: 'userId' })
+  user: User;
 
-  @OneToMany(() => Message, (messages) => messages.contact)
-  messages?: Message[];
+  @OneToMany(() => Conversation, (conversations) => conversations.contact)
+  conversations: Conversation[];
 }

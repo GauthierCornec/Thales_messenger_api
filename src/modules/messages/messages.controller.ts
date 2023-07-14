@@ -22,7 +22,6 @@ export class MessagesController {
     @Req() req: AuthenticatedRequest,
     @Body() createMessageDto: CreateMessageDto,
   ) {
-    createMessageDto.userId = req.user.id;
     return this.messagesService.create(createMessageDto);
   }
 

@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { MessagesModule } from './modules/messages/messages.module';
+import { ConversationsModule } from './modules/conversations/conversations.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { MessagesModule } from './modules/messages/messages.module';
     AuthModule,
     ContactsModule,
     MessagesModule,
+    ConversationsModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

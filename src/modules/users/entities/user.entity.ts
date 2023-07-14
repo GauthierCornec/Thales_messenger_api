@@ -1,10 +1,13 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Contact } from 'src/modules/contacts/entities/contact.entity';
+import { Conversation } from 'src/modules/conversations/entities/conversation.entity';
 import { Message } from 'src/modules/messages/entities/message.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -13,47 +16,41 @@ import {
 @Entity({ name: 'user' })
 export class User {
   @PrimaryGeneratedColumn({ name: 'id' })
-  public id: number;
+  id: number;
 
-  @ApiProperty({ default: '8765432' })
-  @Column({ name: 'uuid', nullable: true })
-  public uuid: string;
+  @Column({ name: 'uuid', nullable: true, default: '8765432' })
+  uuid: string;
 
-  @ApiProperty({ default: 'email@email.fr' })
-  @Column({ name: 'email', nullable: true })
-  public email: string;
+  @Column({ name: 'email', nullable: true, default: 'email@example.com' })
+  email: string;
 
-  @ApiProperty({ default: 'jean' })
-  @Column({ name: 'firstName', nullable: true })
-  public firstName: string;
+  @Column({ name: 'firstName', nullable: true, default: 'Jean' })
+  firstName: string;
 
-  @ApiProperty({ default: 'jean' })
-  @Column({ name: 'lastName', nullable: true })
-  public lastName: string;
+  @Column({ name: 'lastName', nullable: true, default: 'Doe' })
+  lastName: string;
 
-  @ApiProperty({ default: '05669949302' })
-  @Column({ name: 'phoneNumber', nullable: true })
-  public phoneNumber: number;
+  @Column({ name: 'phoneNumber', nullable: true, default: '05669949302' })
+  phoneNumber: string;
 
-  @ApiProperty({ default: 'jean' })
   @Column({ name: 'entryDate', nullable: true })
-  public entryDate: Date;
+  entryDate: Date;
 
-  @ApiProperty({ default: 'jean' })
   @Column({ name: 'password', nullable: true })
-  public password: string;
+  password: string;
 
-  @ApiProperty({ default: 'jean' })
   @UpdateDateColumn({ name: 'updatedAt', nullable: true })
-  public updatedAt: Date;
+  updatedAt: Date;
 
-  @ApiProperty({ default: 'jean' })
   @CreateDateColumn({ name: 'createdAt', nullable: true })
-  public createdAt: Date;
+  createdAt: Date;
 
-  @OneToMany(() => Contact, (contacts) => contacts.user)
-  contacts?: Contact[];
+  @OneToMany(() => Contact, (contact) => contact.user)
+  contacts: Contact[];
 
   @OneToMany(() => Message, (messages) => messages.user)
-  messages?: Message[];
+  messages: Message[];
+
+  @OneToMany(() => Conversation, (conversations) => conversations.user)
+  conversations?: Conversation[];
 }
