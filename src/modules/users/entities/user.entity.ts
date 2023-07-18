@@ -33,9 +33,6 @@ export class User {
   @Column({ name: 'phoneNumber', nullable: true, default: '05669949302' })
   phoneNumber: string;
 
-  @Column({ name: 'entryDate', nullable: true })
-  entryDate: Date;
-
   @Column({ name: 'password', nullable: true })
   password: string;
 

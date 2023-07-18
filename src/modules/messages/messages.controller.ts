@@ -12,6 +12,7 @@ import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { AuthenticatedRequest } from '../../interfaces/Request';
+import { noCognitoUUID } from 'src/helper/errors';
 
 @Controller('messages')
 export class MessagesController {
@@ -22,6 +23,8 @@ export class MessagesController {
     @Req() req: AuthenticatedRequest,
     @Body() createMessageDto: CreateMessageDto,
   ) {
+    if (!req.uuid) throw noCognitoUUID();
+
     return this.messagesService.create(createMessageDto);
   }
 

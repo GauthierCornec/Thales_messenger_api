@@ -3,11 +3,13 @@ import { Message } from 'src/modules/messages/entities/message.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -24,6 +26,12 @@ export class Conversation {
   @Column({ name: 'contactId', nullable: true })
   contactId: number;
 
+  @UpdateDateColumn({ name: 'updatedAt', nullable: true })
+  updatedAt: Date;
+
+  @CreateDateColumn({ name: 'createdAt', nullable: true })
+  createdAt: Date;
+
   @ManyToOne(() => User, (user) => user.conversations)
   @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
   user?: User;
@@ -34,5 +42,4 @@ export class Conversation {
 
   @OneToMany(() => Message, (messages) => messages.conversation)
   messages: Message[];
-
 }

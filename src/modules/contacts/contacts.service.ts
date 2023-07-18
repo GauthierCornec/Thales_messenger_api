@@ -16,12 +16,15 @@ export class ContactsService {
   }
 
   findAll() {
-    return this.contactRepository.find();
+    return this.contactRepository.find({
+      relations: ['conversations', 'conversations.messages'],
+    });
   }
 
   findOne(id: number) {
     return this.contactRepository.findOne({
       where: { id },
+      relations: ['conversations', 'conversations.messages'],
     });
   }
 
